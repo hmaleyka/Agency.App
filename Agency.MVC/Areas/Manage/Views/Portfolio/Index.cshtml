@@ -1,0 +1,51 @@
+﻿@using Agency.Core.Entities;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@model List<Portfolio>
+
+
+@{
+    int count = 0;
+}
+<div class="container" style="margin-left:20px">
+    <a class="btn btn-danger" asp-controller="Portfolio" asp-action="Create"> Create </a>
+</div>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">No#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {   
+
+                count++;
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>@item.Title</td>
+                    <td>@item.Description</td>
+                    <td>
+                        <div style="width:100px">
+                        <img width=100% src="~/Upload/Picture/@item.ImgUrl">
+                            </div>
+                    </td>
+                   
+                    <td >
+                        <a class="btn btn-warning" asp-controller="Portfolio" asp-action="Update" asp-route-id="@item.Id" style="width=100px"> Update</a>
+                        <a class="btn btn-danger" asp-controller="Portfolio" asp-action="Delete" asp-route-id="@item.Id"> Delete</a>
+                    </td>
+                </tr>
+            }
+            
+
+        </tbody>
+     
+
+    </table>
+  
+</div>
